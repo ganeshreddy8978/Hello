@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang=”en”>
+<head>
+    <meta charset=”UTF-8”>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+    <title>Vehicle Information</title>
+    <style>
+        Body {
+            Font-family: Arial, sans-serif;
+            Margin: 0;
+            Padding: 0;
+        }
+
+        .options {
+            Text-align: center;
+            Margin: 20px;
+        }
+
+        Button {
+            Padding: 10px;
+            Margin: 5px;
+            Cursor: pointer;
+        }
+
+        .vehicle-container {
+            Display: flex;
+            Flex-direction: column; /* Change to column to display vehicles in a line-by-line fashion */
+            Align-items: center; /* Center the vehicles horizontally */
+        }
+
+        .vehicle {
+            Border: 1px solid #ddd;
+            Padding: 10px;
+            Margin: 10px;
+            Text-align: center;
+            Width: 150px; /* Set a fixed width for each vehicle box */
+        }
+    </style>
+</head>
+<body>
+
+    <div class=”options”>
+        <button onclick=”showVehicles(‘requirement’)”>Requirement</button>
+        <button onclick=”showVehicles(‘providing’)”>Providing</button>
+    </div>
+
+    <div id=”vehicle-container” class=”vehicle-container”>
+        <!—Vehicle information will be displayed here dynamically (
+    </div>
+
+    <div id=”details-container” class=”details-container”>
+        <!—Details entry form or availability message will be displayed here dynamically (
+    </div>
+
+    <script>
+        Const vehiclesData = {
+            Requirement: [“Bike”, “Car”, “Truck”, “Bus”, “Auto”],
+            Providing: [“Bike”, “Car”, “Truck”, “Bus”, “Auto”],
+        };
+
+        Function showVehicles(type) {
+            Const vehicleContainer = document.getElementById(“vehicle-container”);
+            vehicleContainer.innerHTML = “”;
+
+            const vehicleType = vehiclesData[type];
+
+            vehicleType.forEach(vehicle => {
+                const vehicleElement = document.createElement(“div”);
+                vehicleElement.classList.add(“vehicle”);
+                vehicleElement.textContent = vehicle;
+                vehicleElement.style.backgroundColor = getRandomColor();
+
+                // Add a click event listener to each vehicle element
+                vehicleElement.addEventListener(“click”, () => {
+                    showDetailsEntryForm(vehicle);
+                });
+
+                vehicleContainer.appendChild(vehicleElement);
+            });
+
+            If (type === ‘requirement’) {
+                showAvailabilityMessage();
+            }
+        }
+
+        Function showDetailsEntryForm(vehicle) {
+            Const detailsContainer = document.getElementById(“details-container”);
+            detailsContainer.innerHTML = “”;
+
+            const form = document.createElement(“form”);
+            form.innerHTML = `
+                <label for=”vehicleName”>Vehicle Name:</label>
+                <input type=”text” id=”vehicleName” name=”vehicleName” value=”${vehicle}” readonly>
+
+                <label for=”ownerName”>Owner Name:</label>
+                <input type=”text” id=”ownerName” name=”ownerName” required>
+
+                <label for=”mobileNumber”>Mobile Number:</label>
+                <input type=”tel” id=”mobileNumber” name=”mobileNumber” required>
+
+                <label for=”vehicleImage”>Vehicle Image URL:</label>
+                <input type=”url” id=”vehicleImage” name=”vehicleImage” required>
+
+                <button type=”button” onclick=”submitDetails()”>Submit</button>
+            `;
+
+            detailsContainer.appendChild(form);
+        }
+
+        Function showAvailabilityMessage() {
+            Const detailsContainer = document.getElementById(“details-container”);
+            detailsContainer.innerHTML = “<p>Check the availability message here.</p>”;
+        }
+
+        Function submitDetails() {
+            // Add your logic to handle the form submission
+            // Retrieve values from the form and perform actions as needed
+            Alert(“Details submitted successfully!”);
+        }
+
+        Function getRandomColor() {
+            Const letters = “0123456789ABCDEF”;
+            Let color = “#”;
+            For (let I = 0; I < 6; i++) {
+                Color += letters[Math.floor(Math.random() * 16)];
+            }
+            Return color;
+        }
+    </script>
+</body>
+</html>
